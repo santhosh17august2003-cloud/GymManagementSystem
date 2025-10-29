@@ -27,7 +27,9 @@ SECRET_KEY = 'django-insecure-ku&%6agl02u!g(!e&p@3m1x#n0$_q())t5ru&5*bp1yi)ewzpe
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+AALLOWED_HOSTS = ['gymmanagementsystem-2kso.onrender.com']
+CSRF_TRUSTED_ORIGINS = ["https://gymmanagementsystem-2kso.onrender.com"]
+CORS_ORIGINS_WHITELIST = ["https://gymmanagementsystem-2kso.onrender.com"]
 
 
 # Application definition
