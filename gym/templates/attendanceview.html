@@ -1,0 +1,83 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}Attendance{% endblock %}
+
+{% block content %}
+<div id="attendance-container">
+    <h2 class="attendance-title text-center">Attendance Form</h2>
+    <form action="{% url 'attendanceview' %}" method="post" id="attendance-form">
+        <div class="attendance-field">
+            <label for="attendance-month">Month:</label>
+            <input type="month" id="attendance-month" name="month" required>
+        </div>
+
+        <div class="attendance-field">
+            <label for="attendance-date">Attendance Date:</label>
+            <input type="datetime-local" id="attendance-date" name="attendance_date" required>
+        </div>
+
+        <div class="attendance-field">
+            <label for="attendance-status">Status:</label>
+            <select id="attendance-status" name="status" required>
+                <option value="Present">Present</option>
+                <option value="Absent">Absent</option>
+            </select>
+        </div>
+
+        <button type="submit" class="attendance-button">Submit</button>
+    </form>
+</div>
+
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const currentMonth = String(now.getMonth() + 1).padStart(2, '0');
+        document.getElementById('attendance-month').value = `${currentYear}-${currentMonth}`;
+
+        const localDateTime = now.toISOString().slice(0, 16);
+        document.getElementById('attendance-date').value = localDateTime;
+    });
+</script>
+
+<hr>
+
+<!-- ✅ Filter Form -->
+<form method="get" class="filter-form">
+    <label for="filter-month"><strong>Filter by Month:</strong></label>
+    <input type="month" id="filter-month" name="month" value="{{ request.GET.month }}">
+    <button type="submit" id="buton">Search</button>
+</form>
+
+<!-- ✅ Display Attendance Records -->
+<div>
+    <h3 class="text-primary mt-4">Welcome, {{ request.user.username }}</h3>
+    <h3 class="text-center mb-3">Your Attendance Records</h3>
+
+    {% if user_attendance %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-secondary" style="border:1px solid rgb(13, 12, 12)">
+            <thead>
+                <tr>
+                    <th>Month</th>
+                    <th>Attendance Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in user_attendance %}
+                <tr>
+                    <td>{{ record.month }}</td>
+                    <td>{{ record.attendance_date }}</td>
+                    <td>{{ record.status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="mt-4 text-center">No attendance records found.</p>
+    {% endif %}
+</div>
+{% endblock %}

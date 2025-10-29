@@ -1,0 +1,732 @@
+/* General Body Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: #333;
+}
+
+/* ==== Navigation Bar ==== */
+#nav {
+    background-color: rgb(172, 124, 124);
+    font-style: oblique;
+    padding: 10px 20px;
+    display: flex; /* Added for better alignment */
+    justify-content: space-between; /* Adjusted for menu toggle */
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+#navigation {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px; /* Added max-width */
+    gap: 30px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap; /* Added to allow wrapping on smaller screens */
+}
+
+#navigation .nav-item .nav-link,
+#navigation .nav-link {
+    color: #000;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    padding: 8px 15px;
+    display: block;
+    white-space: nowrap; /* Prevent nav links from breaking */
+}
+
+#navigation .nav-item .nav-link:hover,
+#navigation .nav-link:hover,
+#navigation .nav-item .nav-link.active {
+    color: white;
+    border: 2px solid #007bff;
+    background-color: #007bff;
+    border-radius: 20px;
+}
+
+#navigation .nav-item .fee-dropdown {
+    background: transparent;
+    border: none;
+    color: #000;
+    font-weight: 500;
+    padding: 8px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+#navigation .nav-item .fee-dropdown:hover,
+#navigation .nav-item .fee-dropdown:focus {
+    background-color: #007bff;
+    color: white;
+}
+
+.menu-toggle {
+    display: none; /* Hidden by default for larger screens */
+    background: none;
+    border: none;
+    color: black;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    outline: none;
+}
+
+/* Responsive Navigation (already good, slightly adjusted for consistency) */
+@media (max-width: 768px) {
+    #navigation {
+        flex-direction: column;
+        width: 100%;
+        display: none; /* Hide by default on small screens, JS toggles 'active' */
+        background-color: rgb(172, 124, 124);
+        position: absolute;
+        top: 60px; /* Adjust if your nav height is different */
+        left: 0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        max-width: none; /* Remove max-width on mobile menu */
+    }
+
+    #navigation.active {
+        display: flex; /* Show when 'active' class is added by JS */
+    }
+
+    #navigation .nav-item .nav-link,
+    #navigation .nav-link {
+        margin: 0;
+        padding: 12px 20px;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    #navigation .nav-item:last-child .nav-link {
+        border-bottom: none;
+    }
+
+    .menu-toggle {
+        display: block; /* Show the toggle button */
+    }
+}
+
+/* ==== Hero Section ==== */
+#bg-image {
+    background: url("bg.jpg") center center/cover no-repeat;
+    height: 450px; /* Can be adjusted with responsive rules */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: blur(3px);
+    -webkit-filter: blur(3px);
+    overflow: hidden;
+}
+
+#bg-image::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 1);
+}
+
+#box {
+    color: #fff;
+    padding: 20px; /* Reduced padding for smaller screens */
+    text-align: center;
+    width: 90%; /* Adjusted from 100% to 90% for padding space */
+    max-width: 800px; /* Added max-width */
+    position: absolute;
+    top: 50%; /* Centered vertically */
+    left: 50%; /* Centered horizontally */
+    transform: translate(-50%, -50%); /* For perfect centering */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2; /* Ensure it's above the blurred image */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+#txt {
+    font-size: 48px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    text-shadow: 1px 1px 0 #555, 2px 2px 0 #444, 3px 3px 0 #333, 4px 4px 0 #222, 5px 5px 0 #111;
+}
+
+#box p {
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    max-width: 600px;
+    margin-top: 10px; /* Added margin */
+}
+
+/* Responsive adjustments for Hero Section Text */
+@media (max-width: 600px) {
+    #txt {
+        font-size: 36px; /* Smaller font for smaller screens */
+    }
+    #box p {
+        font-size: 0.95rem; /* Slightly smaller text */
+    }
+    #bg-image {
+        height: 350px; /* Shorter hero section on small screens */
+    }
+}
+
+/* ==== Packages Section ==== */
+#back {
+    background-color: orangered;
+    max-width: 100%;
+    padding: 30px 15px; /* Added padding */
+    box-sizing: border-box; /* Include padding in width */
+    margin-top: -80px; /* Adjust this value if needed, was -90px */
+}
+
+#pack {
+    text-align: center;
+    font-style: oblique;
+    margin-bottom: 30px; /* Space below title */
+    color: white;
+    font-size: 32px; /* Default size */
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+#pack:hover {
+    transform: scale(1.1); /* Simplified transformation */
+    color: olivedrab;
+}
+
+/* Flexbox for the row of packages */
+.row.justify-content-center {
+    display: flex;
+    flex-wrap: wrap; /* Allow cards to wrap to next line */
+    justify-content: center;
+    gap: 20px; /* Space between cards */
+    margin: 0; /* Remove default row margins */
+}
+
+#pac1, #pac2, #pac3 {
+    border: 2px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    transition: transform 0.3s ease;
+    width: 280px; /* Adjusted fixed width to a more reasonable size */
+    flex-shrink: 0; /* Prevent shrinking below this width */
+    margin-left: 0; /* Removed fixed margin-left, using gap instead */
+    margin-bottom: 20px; /* Space between rows of cards */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+#pac1:hover, #pac2:hover, #pac3:hover {
+    transform: scale(1.05);
+}
+
+#b1 .btn, #b2 .btn, #b3 .btn {
+    display: inline-block; /* Ensure button styles apply */
+    margin-top: 15px; /* Space above button */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#b1 .btn:hover, #b2 .btn:hover, #b3 .btn:hover {
+    background-color: #0056b3;
+    color: white; /* Ensure text remains white on hover */
+}
+
+/* Responsive adjustments for Packages */
+@media (max-width: 992px) { /* Tablets and smaller */
+    #pack {
+        font-size: 28px;
+    }
+    #pac1, #pac2, #pac3 {
+        width: 45%; /* Two cards per row on tablets */
+    }
+}
+
+@media (max-width: 600px) { /* Mobile */
+    #pack {
+        font-size: 24px;
+        margin-top: -50px; /* Adjust if needed */
+    }
+    #pac1, #pac2, #pac3 {
+        width: 90%; /* One card per row on mobile */
+        margin-left: auto; /* Center individual cards */
+        margin-right: auto; /* Center individual cards */
+    }
+    .row.justify-content-center {
+        flex-direction: column; /* Stack them vertically explicitly */
+        align-items: center; /* Center them when stacked */
+    }
+}
+
+
+/* ==== Login/Register Forms (#log) ==== */
+#log {
+    border: 2px solid grey;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    margin: 50px auto;
+    padding: 30px 40px;
+    max-width: 450px; /* Changed from fixed width to max-width */
+    width: 90%; /* Responsive width */
+    min-height: 600px;
+    border-radius: 30px;
+    background-color: rgba(0, 255, 255, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+#log h2, #log h3 { /* Added h3 for login.html */
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-weight: bold;
+}
+
+#log form div {
+    margin-bottom: 20px;
+}
+
+#log label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+}
+
+#log input,
+#log select,
+#log textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+#log button {
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+#log button:hover {
+    background-color: #218838;
+}
+
+/* Specific input fields in login/register */
+#username, #password {
+    border: 2px solid black;
+    border-radius: 50px;
+    padding: 10px;
+    outline: none;
+    margin-left: 0; /* Remove fixed margin-left, use form padding */
+    width: 100%; /* Ensure they take full width */
+    box-sizing: border-box;
+}
+
+#sub { /* This appears to be a submit button style, ensure it's a button element */
+    margin-left: auto; /* Center the button if needed */
+    margin-right: auto;
+    display: block; /* Make it a block element to center with margin auto */
+    border: 2px solid black;
+    border-radius: 50px;
+    width: 100px; /* Keep this width if desired, but might need to be responsive */
+    padding: 10px; /* Add padding for better touch area */
+    background-color: #f0f0f0; /* Default color if not set elsewhere */
+    color: #333; /* Default text color */
+    cursor: pointer;
+    text-align: center; /* For text inside */
+}
+#sub:hover {
+    background-color: rgb(81, 81, 116);
+    color: white;
+}
+
+#reg {
+    display: block;
+    float: right;
+    margin-right: 0;
+    width: fit-content;
+    padding: 10px 20px;
+    border: 2px solid blue;
+    border-radius: 20px;
+    text-decoration: none;
+    text-align: center;
+    
+}
+#reg:hover {
+    background-color: blue;
+    color: white;
+    
+}
+
+
+#tit { /* Title inside register form */
+    text-align: center;
+    font-style: oblique;
+}
+
+/* ==== Payment Form (#payment) ==== */
+#payment {
+    border: 2px solid grey;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    margin: 50px auto;
+    padding: 30px 40px;
+    max-width: 450px; /* Changed from fixed width to max-width */
+    width: 90%; /* Responsive width */
+    min-height: 600px;
+    border-radius: 30px;
+    background-color: rgba(0, 255, 255, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+#payment h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-weight: bold;
+}
+
+#payment label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+#payment input,
+#payment select,
+#payment textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+#payment button {
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+#payment button:hover {
+    background-color: #218838;
+}
+
+/* Django Form Specific Styles (user-filter-select) */
+.user-filter-select {
+    border: 2px dashed #28a745;
+    border-radius: 5px;
+    background: #eaffea;
+    padding: 10px;
+    font-weight: bold;
+    width: 100%; /* Ensure it's responsive */
+    box-sizing: border-box;
+}
+
+/* ==== Attendance Form Styling (Like Payment Form) ==== */
+#attendance-container {
+    border: 2px solid grey;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    margin: 50px auto;
+    padding: 30px 40px;
+    max-width: 450px; /* Changed from fixed width to max-width */
+    width: 90%; /* Responsive width */
+    min-height: 600px;
+    border-radius: 30px;
+    background-color: rgba(0, 255, 255, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.attendance-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 25px;
+    color: #333;
+    font-weight: bold;
+}
+
+#attendance-form .attendance-field {
+    margin-bottom: 18px;
+}
+
+#attendance-form .attendance-field label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #444;
+}
+
+#attendance-month,
+#attendance-date,
+#attendance-status {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+#attendance-form .attendance-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.attendance-button:hover {
+    background-color: #0056b3;
+}
+
+/* General responsive adjustments for smaller screens */
+@media (max-width: 480px) {
+    /* Reduce padding on forms for very small screens */
+    #log, #payment, #attendance-container {
+        padding: 20px 25px;
+    }
+
+    #txt {
+        font-size: 30px;
+    }
+
+    #box p {
+        font-size: 0.9rem;
+    }
+
+    #nav {
+        padding: 8px 15px;
+    }
+
+    #navigation.active {
+        top: 50px; /* Adjust if nav height changes */
+    }
+
+    #reg, #sub { /* Adjust button sizes if needed */
+        width: 80%;
+        max-width: 200px; /* Limit max width for centering */
+    }
+}
+/* Filter Form Styling */
+.filter-form {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.filter-form label {
+    font-weight: bold;
+    margin-right: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+}
+
+.filter-form input[type="month"] {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-right: 0.5rem;
+}
+
+.filter-form #buton {
+    padding: 0.5rem 1rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.filter-form #buton:hover {
+    background-color: #45a049;
+}
+/* ==== Product Module (Add + Display) ==== */
+
+.product-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Add Product Form Styling */
+.product-form #prod {
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: rgba(0, 255, 255, 0.2);
+    border: 2px solid #ddd;
+    border-radius: 10px;
+}
+
+.product-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+.product-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.product-form input,
+.product-form textarea,
+.product-form select #prod {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.product-form button {
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.product-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Product List Grid */
+.product-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+.product-grid #pro {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #fafafa;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: scale(1.03);
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+#update3 {
+    text-decoration: none;
+    float: right;
+    border: 2px solid rgb(68, 221, 68);
+    background-color: rgb(68, 221, 68);
+    border-radius: 9px;
+    padding: 5px 10px;
+    color: black;
+}
+#update3:hover{
+    background-color: green;
+}
+#logout {
+    border-radius: 20px;
+    padding: 8px 15px;
+    transition: 0.3s;
+}
+
+#lg {
+    color: black !important; 
+    text-decoration: none;
+}
+
+#lg:hover {
+    background-color: #28a745;
+    color: white;
+}
+#admin-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+#admin-btn:hover {
+    background-color: #0056b3;
+}

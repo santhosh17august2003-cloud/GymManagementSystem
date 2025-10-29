@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div>
+    <form action="{% url 'updatesix' instance.id %}" method="post" id="payment">
+       
+         <h2>Fee</h2>
+
+        <label for="fee">Fee:</label>
+        <input type="text" id="fee" name="Fee" value="6500" readonly class="form-control">
+
+        <label for="actualfee">Actual Fee:</label>
+        <input type="text" id="actualfee" name="Actualfee" class="form-control" required>
+
+       <label for="pendingfee">Pending Fee:</label>
+       <input type="text" id="pendingfee" readonly class="form-control"> {# Removed name="pendingfee" #}
+
+       <label for="datetime">Date:</label>
+       <input type="datetime-local" id="datetime" name="Datetime" class="form-control" required>
+
+
+        <button type="submit" class="btn btn-primary">Pay</button>
+    </form>
+   <script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const now = new Date();
+        const offset = now.getTimezoneOffset() * 60000;
+        const localIsoString = new Date(now.getTime() - offset).toISOString().slice(0, 16);
+        document.getElementById('datetime').value = localIsoString;
+    });
+
+  document.getElementById('actualfee').addEventListener('input', () => {
+    const fee = parseInt(document.getElementById('fee').value) || 0;
+    const actualFee = parseInt(document.getElementById('actualfee').value) || 0;
+    const pendingFee = fee - actualFee;
+    document.getElementById('pendingfee').value = pendingFee >= 0 ? pendingFee : 0;
+  });
+   </script>
+</div>
+{% endblock %}

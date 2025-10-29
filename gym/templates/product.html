@@ -1,0 +1,8 @@
+{% extends 'index.html' %}
+{% block content %}
+<h2>Add New Product</h2>
+<form method="post" enctype="multipart/form-data">
+    {{ form.as_p }}
+    <button type="submit">Save Product</button>
+</form>
+{% endblock %}

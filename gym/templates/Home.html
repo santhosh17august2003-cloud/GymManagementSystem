@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container mt-5" id="back">
+    <h3 id="pack">PACKAGES</h3><br><br>
+    <div class="row justify-content-center" style="display: flex;">
+        <div class="col-sm-4" id="pac1">
+            <h5 class="text-center">3 Months</h5>
+            <h6 class="text-center">₹3000</h6>
+            <p>Book unlimited classes anytime at any centre in your city for 3 months.</p>
+            <div class="text-center" id="b1"><a href="{% url 'payment' %}" class="btn">Book Now</a></div>
+        </div>
+        <div class="col-sm-4" id="pac2">
+            <h5 class="text-center">6 Months</h5>
+            <h6 class="text-center">₹6500</h6>
+            <p>Book unlimited classes anytime at any centre in your city for 6 months.</p>
+            <div class="text-center" id="b2"><a href="{% url 'sixpayment' %}" class="btn">Book Now</a></div>
+        </div>
+        <div class="col-sm-4" id="pac3">
+            <h5 class="text-center">One Year</h5>
+            <h6 class="text-center">₹10000</h6>
+            <p>Book unlimited classes anytime at any centre in your city for 1 year.</p>
+            <div class="text-center" id="b3"><a href="{% url 'onepayment' %}" class="btn">Book Now</a></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div>
+    <form action="{% url 'sixpayment' %}" method="post" id="payment">
+       
+        <h2 class="text-primary">Fee Details</h2>
+
+        <label for="fee">Fee:</label>
+        <input type="text" id="fee" name="Fee" value="6500" readonly class="form-control">
+
+        <label for="actualfee">Actual Fee:</label>
+        <input type="text" id="actualfee" name="Actualfee" class="form-control" required>
+
+        <label for="pendingfee">Pending Fee:</label>
+        <input type="text" id="pendingfee" readonly class="form-control">
+
+        <label for="datetime">Date:</label>
+        <input type="datetime-local" id="datetime" name="Datetime" class="form-control" required>
+
+        <button type="submit" class="btn btn-primary mt-3">Pay</button>
+    </form>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const now = new Date();
+            const offset = now.getTimezoneOffset() * 60000;
+            const localIsoString = new Date(now.getTime() - offset).toISOString().slice(0, 16);
+            document.getElementById('datetime').value = localIsoString;
+        });
+
+        document.getElementById('actualfee').addEventListener('input', () => {
+            const fee = parseInt(document.getElementById('fee').value) || 0;
+            const actualFee = parseInt(document.getElementById('actualfee').value) || 0;
+            const pendingFee = fee - actualFee;
+            document.getElementById('pendingfee').value = pendingFee >= 0 ? pendingFee : 0;
+        });
+    </script>
+</div>
+
+{% if datas %}
+    <h3 class="text-primary mt-4">Welcome, {{ request.user.username }}</h3>
+    <h3 class="page-header text-primary text-center">Payment History</h3>
+    <p>
+        <a href="{% url 'updatesix' datas.0.id %}" id="update3">Update Latest Fee</a>
+    </p>
+    <table class="table table-bordered table-secondary" style="border:1px solid rgb(13, 12, 12)">
+        <thead>
+            <tr>
+                <th>S.no</th>
+                <th>Fee</th>
+                <th>Actual Fee</th>
+                <th>Pending Fee</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in datas %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ data.Fee }}</td>
+                    <td>{{ data.Actualfee }}</td>
+                    <td>{{ data.Pendingfee }}</td>
+                    <td>{{ data.Datetime }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p class="mt-4 text-center">No 6-month payment data available.</p>
+{% endif %}
+
+{% endblock %}
